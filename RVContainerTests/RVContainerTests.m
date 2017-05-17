@@ -28,7 +28,7 @@
 - (void)test_can_resolve_wihout_binding{
     RVContainer * container = [RVContainer new];
     
-    TestClass * object      = [container resolve:TestClass.class];
+    TestClass * object      = [container make:TestClass.class];
     
     XCTAssertEqual( object.class, TestClass.class);
 }
@@ -37,7 +37,7 @@
     RVContainer * container = [RVContainer new];
     [container bind:TestClass.class resolver:SubTestClass.class];
     
-    TestClass * object      = [container resolve:TestClass.class];
+    TestClass * object      = [container make:TestClass.class];
     
     XCTAssertEqual( object.class, SubTestClass.class);
 }
@@ -51,7 +51,7 @@
         return [TestClass new];
     }];
     
-    TestClass * object = [container resolve:TestClass.class];
+    TestClass * object = [container make:TestClass.class];
     
     XCTAssertEqual( object.class, TestClass.class);
     [self waitForExpectationsWithTimeout:0.2 handler:nil];
@@ -61,7 +61,7 @@
     RVContainer * container = [RVContainer new];
     [container bindProtocol:@protocol(TesteProtocol) resolver:SubTestClass.class];
     
-    TestClass * object      = [container resolveProtocol:@protocol(TesteProtocol)];
+    TestClass * object      = [container makeProtocol:@protocol(TesteProtocol)];
     
     XCTAssertEqual( object.class, SubTestClass.class);
 }
@@ -72,7 +72,7 @@
     
     [container instance:TestClass.class object:instance];
     
-    TestClass * object = [container resolve:TestClass.class];
+    TestClass * object = [container make:TestClass.class];
     
     XCTAssertEqual(object, instance);
 }
@@ -84,9 +84,9 @@
         return [SubTestClass new];
     }];
     
-    TestClass * object  = [container resolve:TestClass.class];
-    TestClass * object2 = [container resolve:TestClass.class];
-    TestClass * object3 = [container resolve:TestClass.class];
+    TestClass * object  = [container make:TestClass.class];
+    TestClass * object2 = [container make:TestClass.class];
+    TestClass * object3 = [container make:TestClass.class];
     
     XCTAssertEqual(object, object2);
     XCTAssertEqual(object2, object3);

@@ -10,6 +10,18 @@
 
 @implementation RVContainer
 
+//=======================================================
+#pragma mark - Singleton
+//=======================================================
++ (RVContainer*) container {
+    static RVContainer *container = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        container = [[self alloc] init];
+    });
+    return container;
+}
+
 -(id)init{
     if( self = [super init]){
         self.bindings   = [NSMutableDictionary new];
@@ -54,29 +66,29 @@
 //=======================================================
 #pragma mark - Resolve
 //=======================================================
--(id)resolve:(Class)class{
+-(id)make:(Class)class{
     NSString * className = NSStringFromClass(class);
     id resolver          = self.bindings[className];
     if( ! resolver ){
         return [class new];
     }
-    return [self resolveWithResolver:resolver];
+    return [self makeWithResolver:resolver];
 }
 
--(id)resolveProtocol:(Protocol*)protocol{
+-(id)makeProtocol:(Protocol*)protocol{
     NSString * protocolName = NSStringFromProtocol(protocol);
     id resolver             = self.bindings[protocolName];
     if( ! resolver){
         [NSException raise:@"No implementation" format:@"A protocol can't be instantiated without a implementation"];
     }
-    return [self resolveWithResolver:resolver];
+    return [self makeWithResolver:resolver];
 }
 
 
 //=======================================================
 #pragma mark - Private
 //=======================================================
--(id)resolveWithResolver:(id)resolver{
+-(id)makeWithResolver:(id)resolver{
     if([resolver isKindOfClass:NSString.class]){
         return [NSClassFromString(resolver) new];
     }

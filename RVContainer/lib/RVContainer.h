@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define IOC [RVContainer container]
+
 @interface RVContainer : NSObject
 
 @property(strong,nonatomic) NSMutableDictionary * bindings;
@@ -21,6 +23,9 @@
 -(void)instance:(Class)class object:(id)object;
 -(void)singleton:(Class)class closure:(id (^)(void))closure;
 
--(id)resolve:(Class)class;
--(id)resolveProtocol:(Protocol*)protocol;
+-(id)make:(Class)class;
+-(id)makeProtocol:(Protocol*)protocol;
+
++(RVContainer*)container;
+
 @end

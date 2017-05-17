@@ -30,14 +30,14 @@
 
 +(void)injectObject:(id)object className:(NSString*)className property:(NSString*)property container:(RVContainer*)container{
     className = [className stringByReplacingOccurrencesOfString:@"<RVInjectedClass>" withString:@""];
-    [object setValue:[container resolve:NSClassFromString(className)]
+    [object setValue:[container make:NSClassFromString(className)]
               forKey:property];
 }
 
 +(void)injectProtocol:(id)object className:(NSString*)className property:(NSString*)property container:(RVContainer*)container{
     className = [className stringByReplacingOccurrencesOfString:@"RVInjectedProtocol<" withString:@""];
     className = [className stringByReplacingOccurrencesOfString:@">" withString:@""];
-    [object setValue:[container resolveProtocol:NSProtocolFromString(className)]
+    [object setValue:[container makeProtocol:NSProtocolFromString(className)]
               forKey:property];
 }
 
