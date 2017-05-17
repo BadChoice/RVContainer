@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7630A3F11ECCBDEF009FBE97 /* RVContainer.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 7630A3EE1ECCBDEF009FBE97 /* RVContainer.podspec.json */; };
 		76429CF31ECC9387006229B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76429CF21ECC9387006229B0 /* main.m */; };
 		76429CF61ECC9387006229B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76429CF51ECC9387006229B0 /* AppDelegate.m */; };
 		76429CF91ECC9387006229B0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76429CF81ECC9387006229B0 /* ViewController.m */; };
@@ -33,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7630A3EC1ECCBDEF009FBE97 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7630A3ED1ECCBDEF009FBE97 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		7630A3EE1ECCBDEF009FBE97 /* RVContainer.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RVContainer.podspec.json; sourceTree = "<group>"; };
 		76429CEE1ECC9387006229B0 /* RVContainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVContainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76429CF21ECC9387006229B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76429CF41ECC9387006229B0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +85,9 @@
 		76429CE51ECC9387006229B0 = {
 			isa = PBXGroup;
 			children = (
+				7630A3EC1ECCBDEF009FBE97 /* LICENSE */,
+				7630A3ED1ECCBDEF009FBE97 /* readme.md */,
+				7630A3EE1ECCBDEF009FBE97 /* RVContainer.podspec.json */,
 				76429CF01ECC9387006229B0 /* RVContainer */,
 				76429D0A1ECC9387006229B0 /* RVContainerTests */,
 				76429CEF1ECC9387006229B0 /* Products */,
@@ -242,6 +249,7 @@
 				76429D011ECC9387006229B0 /* LaunchScreen.storyboard in Resources */,
 				76429CFE1ECC9387006229B0 /* Assets.xcassets in Resources */,
 				76429CFC1ECC9387006229B0 /* Main.storyboard in Resources */,
+				7630A3F11ECCBDEF009FBE97 /* RVContainer.podspec.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +474,7 @@
 				76429D121ECC9387006229B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76429D131ECC9387006229B0 /* Build configuration list for PBXNativeTarget "RVContainerTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +483,7 @@
 				76429D151ECC9387006229B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
