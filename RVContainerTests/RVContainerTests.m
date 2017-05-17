@@ -54,7 +54,22 @@
     TestClass * object = [container make:TestClass.class];
     
     XCTAssertEqual( object.class, TestClass.class);
+    
     [self waitForExpectationsWithTimeout:0.2 handler:nil];
+}
+
+-(void)test_resolve_from_closure_is_new_object{
+    
+    RVContainer * container = [RVContainer new];
+    [container bind:TestClass.class closure:^id{
+        return [TestClass new];
+    }];
+    
+    TestClass * object  = [container make:TestClass.class];
+    TestClass * object2 = [container make:TestClass.class];
+    
+    XCTAssertNotEqual(object, object2);
+    
 }
 
 -(void)test_can_resolve_protocol{
@@ -92,6 +107,15 @@
     XCTAssertEqual(object2, object3);
 }
 
+-(void)test_singleton_can_be_used{
+    
+    [IOC bind:TestClass.class resolver:SubTestClass.class];
+    
+    TestClass * object      = [IOC make:TestClass.class];
+    
+    XCTAssertEqual( object.class, SubTestClass.class);
+    
+}
 - (void)testPerformanceExample {
     [self measureBlock:^{
 

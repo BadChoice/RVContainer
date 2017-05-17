@@ -9,46 +9,70 @@
 #import "RVAutoInject.h"
 #import <objc/runtime.h>
 
+
 @implementation RVAutoInject
 
+
+//=======================================================
+#pragma mark - Static calls
+//=======================================================
++(void)autoInject:(id)object{
+    [self.class autoInject:object container:nil];
+}
+
 +(void)autoInject:(id)object container:(RVContainer*)container{
-    
-    NSDictionary* propertiesToInject = [self.class findPropertiesToInject:object];
+    RVAutoInject * ai = [RVAutoInject new];
+    ai.container = container;
+    [ai autoinject:object];
+}
+
+//=======================================================
+#pragma mark -
+//=======================================================
+-(void)autoinject:(NSObject*)object{
+    self.object = object;
+    NSDictionary* propertiesToInject = [self findPropertiesToInject];
     
     for( NSString* property in propertiesToInject.allKeys ){
         NSString* className = propertiesToInject[property];
         
         if([className containsString:@"<RVInjectedClass>"]){
-            [self.class injectObject:object className:className property:property container:container];
+            [self injectObject:property className:className];
         }
         else{
-            [self.class injectProtocol:object className:className property:property container:container];
-        }
-
+            [self injectProtocol:property className:className];
+        }        
     }
 }
 
-+(void)injectObject:(id)object className:(NSString*)className property:(NSString*)property container:(RVContainer*)container{
+-(RVContainer*)container{
+    if( ! _container) _container = IOC;
+    return _container;
+}
+
+-(void)injectObject:(NSString*)property className:(NSString*)className{
     className = [className stringByReplacingOccurrencesOfString:@"<RVInjectedClass>" withString:@""];
-    [object setValue:[container make:NSClassFromString(className)]
+    [self.object setValue:[self.container make:NSClassFromString(className)]
               forKey:property];
 }
 
-+(void)injectProtocol:(id)object className:(NSString*)className property:(NSString*)property container:(RVContainer*)container{
+-(void)injectProtocol:(NSString*)property className:(NSString*)className{
     className = [className stringByReplacingOccurrencesOfString:@"RVInjectedProtocol<" withString:@""];
     className = [className stringByReplacingOccurrencesOfString:@">" withString:@""];
-    [object setValue:[container makeProtocol:NSProtocolFromString(className)]
+    [self.object setValue:[self.container makeProtocol:NSProtocolFromString(className)]
               forKey:property];
 }
 
 
-
-+(NSDictionary*)findPropertiesToInject:(id)object{
+//=======================================================
+#pragma mark - Objective c runtime
+//=======================================================
+-(NSDictionary*)findPropertiesToInject{
     
     NSMutableDictionary* propertiesToInject = [NSMutableDictionary new];
     
     unsigned int outCount, i;
-    objc_property_t *properties = class_copyPropertyList([object class], &outCount);
+    objc_property_t *properties = class_copyPropertyList([self.object class], &outCount);
     for(i = 0; i < outCount; i++) {
         objc_property_t property = properties[i];
         const char *propName = property_getName(property);

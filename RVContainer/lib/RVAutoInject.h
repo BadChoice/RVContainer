@@ -20,6 +20,12 @@
 
 @interface RVAutoInject : NSObject
 
+@property (weak, nonatomic) RVContainer* container;
+@property (weak, nonatomic) NSObject* object;
+
++(void)autoInject:(id)object;
 +(void)autoInject:(id)object container:(RVContainer*)container;
+-(void)autoinject:(NSObject*)object;
+
 
 @end
