@@ -63,6 +63,11 @@
     self.bindings[protocolName] = resolverName;
 }
 
+-(void)bindProtocol:(Protocol*)protocol instance:(id)instance{
+    NSString * protocolName     = NSStringFromProtocol(protocol);
+    self.bindings[protocolName] = instance;
+}
+
 //=======================================================
 #pragma mark - Resolve
 //=======================================================

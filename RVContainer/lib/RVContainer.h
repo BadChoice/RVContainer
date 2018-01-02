@@ -19,6 +19,7 @@
 
 -(void)bindProtocol:(Protocol*)protocol closure:(id (^)(void))closure;
 -(void)bindProtocol:(Protocol*)protocol resolver:(Class)resolver;
+-(void)bindProtocol:(Protocol*)protocol instance:(id)instance;
 
 -(void)instance:(Class)class object:(id)object;
 -(void)singleton:(Class)class closure:(id (^)(void))closure;
