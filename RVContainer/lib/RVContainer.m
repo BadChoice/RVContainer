@@ -64,17 +64,12 @@
 #pragma mark - Resolve
 //=======================================================
 - (id)make:(Class)class{
-    NSString * className = NSStringFromClass(class);
-    id resolver          = self.bindings[className];
-    if (! resolver ) {
-        return [class new];
-    }
+    id resolver = [self resolverFor:class];
     return [self makeWithResolver:resolver];
 }
 
 - (id)makeProtocol:(Protocol*)protocol{
-    NSString * protocolName = NSStringFromProtocol(protocol);
-    id resolver             = self.bindings[protocolName];
+    id resolver = [self resolverForProtocol:protocol];
     if (! resolver) {
         return nil;
         //[NSException raise:@"No implementation" format:@"A protocol can't be instantiated without a implementation"];
@@ -82,6 +77,17 @@
     return [self makeWithResolver:resolver];
 }
 
+-(Class)resolverFor:(Class)class{
+    NSString * className = NSStringFromClass(class);
+    id resolver          = self.bindings[className];
+    return resolver ? resolver : class;
+    
+}
+
+-(Class)resolverForProtocol:(Protocol*)protocol{
+    NSString * protocolName = NSStringFromProtocol(protocol);
+    return self.bindings[protocolName];
+}
 
 //=======================================================
 #pragma mark - Private

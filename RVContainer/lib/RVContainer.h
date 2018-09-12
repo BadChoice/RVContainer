@@ -21,6 +21,9 @@
 -(void)bindProtocol:(Protocol*)protocol resolver:(Class)resolver;
 -(void)bindProtocol:(Protocol*)protocol instance:(id)instance;
 
+-(Class)resolverFor:(Class)class;
+-(Class)resolverForProtocol:(Protocol*)protocol;
+
 -(void)instance:(Class)class object:(id)object;
 -(void)singleton:(Class)class closure:(id (^)(void))closure;
 
