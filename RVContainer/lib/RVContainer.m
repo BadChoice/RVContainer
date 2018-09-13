@@ -1,3 +1,4 @@
+#import <objc/runtime.h>
 #import "RVContainer.h"
 
 @implementation RVContainer
@@ -81,7 +82,6 @@
     NSString * className = NSStringFromClass(class);
     id resolver          = self.bindings[className];
     return resolver ? resolver : class;
-    
 }
 
 -(Class)resolverForProtocol:(Protocol*)protocol{
@@ -100,6 +100,10 @@
     if ([resolver isKindOfClass:NSClassFromString(@"NSBlock")]) {
         id(^block)(void) = resolver;
         return block();
+    }
+    
+    if (class_isMetaClass(object_getClass(resolver))){
+        return [resolver new];
     }
     
     return resolver;
