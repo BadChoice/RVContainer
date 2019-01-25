@@ -213,6 +213,7 @@
 				TargetAttributes = {
 					76429CED1ECC9387006229B0 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = F2VSE3YKKD;
 						ProvisioningStyle = Automatic;
 					};
 					76429D061ECC9387006229B0 = {
@@ -413,6 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2VSE3YKKD;
 				INFOPLIST_FILE = RVContainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVContainer;
@@ -424,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2VSE3YKKD;
 				INFOPLIST_FILE = RVContainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVContainer;
