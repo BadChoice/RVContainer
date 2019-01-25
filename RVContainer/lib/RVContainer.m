@@ -66,7 +66,7 @@
 //=======================================================
 - (id)make:(Class)class{
     id resolver = [self resolverFor:class];
-    return [self makeWithResolver:resolver];
+    return resolver ? ([resolver isKindOfClass:NSString.class] ? NSClassFromString(resolver) : resolver) : class;
 }
 
 - (id)makeProtocol:(Protocol*)protocol{
