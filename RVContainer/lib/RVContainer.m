@@ -61,6 +61,10 @@
     self.bindings[protocolName] = instance;
 }
 
+-(void)clear {
+    self.bindings = NSMutableDictionary.new;
+}
+
 //=======================================================
 #pragma mark - Resolve
 //=======================================================
