@@ -85,7 +85,7 @@
 -(Class)resolverFor:(Class)class{
     NSString * className = NSStringFromClass(class);
     id resolver          = self.bindings[className];
-    return resolver ? NSClassFromString(resolver) : class;
+    return resolver ? ([resolver isKindOfClass:NSString.class] ? NSClassFromString(resolver) : resolver) : class;
 }
 
 -(Class)resolverForProtocol:(Protocol*)protocol{
